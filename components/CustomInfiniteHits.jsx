@@ -3,20 +3,20 @@ import { useInfiniteHits } from 'react-instantsearch-hooks-web';
 import Product from './Product';
 
 const CustomInfiniteHits = (props) => {
-  const { hits, isFirstPage, isLastPage, showPrevious, showMore } = useInfiniteHits(props);
+	const { hits, isFirstPage, isLastPage, showPrevious, showMore } = useInfiniteHits(props);
 
-  return (
-    <>
-      {!isFirstPage && (
-        <IonButton
-          expand="full"
-          color="dark"
-          className="mb-4 square-border"
-          onClick={() => showPrevious()}
-        >
-          Show Previous
-        </IonButton>
-      )}
+	return (
+		<>
+			{!isFirstPage && (
+				<IonButton
+					expand="full"
+					color="dark"
+					className="mb-4 square-border"
+					onClick={() => showPrevious()}
+				>
+					Show Previous
+				</IonButton>
+			)}
 
       <ul className="grid grid-cols-2 gap-2">
         {hits.map((hit) => (
@@ -24,18 +24,18 @@ const CustomInfiniteHits = (props) => {
         ))}
       </ul>
 
-      {!isLastPage && (
-        <IonButton
-          expand="full"
-          color="dark"
-          className="mt-4 square-border"
-          onClick={() => showMore()}
-        >
-          Show More
-        </IonButton>
-      )}
-    </>
-  );
+			{!isLastPage && (
+				<IonButton
+					expand="full"
+					color="dark"
+					className="mt-4 square-border"
+					onClick={() => showMore()}
+				>
+					Show More
+				</IonButton>
+			)}
+		</>
+	);
 };
 
 export default CustomInfiniteHits;

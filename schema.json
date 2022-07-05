@@ -1,0 +1,186 @@
+{
+	"name": "products",
+	"fields": [
+		{
+			"facet": false,
+			"index": true,
+			"infix": false,
+			"locale": "",
+			"name": "title",
+			"optional": false,
+			"sort": false,
+			"type": "string"
+		},
+		{
+			"facet": true,
+			"index": true,
+			"infix": false,
+			"locale": "",
+			"name": "brand",
+			"optional": false,
+			"sort": false,
+			"type": "string"
+		},
+		{
+			"facet": true,
+			"index": true,
+			"infix": false,
+			"locale": "",
+			"name": "vendor",
+			"optional": true,
+			"sort": false,
+			"type": "string"
+		},
+		{
+			"facet": true,
+			"index": true,
+			"infix": false,
+			"locale": "",
+			"name": "conditionCode",
+			"optional": true,
+			"sort": false,
+			"type": "string"
+		},
+		{
+			"facet": false,
+			"index": false,
+			"infix": false,
+			"locale": "",
+			"name": "sku",
+			"optional": true,
+			"sort": false,
+			"type": "string"
+		},
+		{
+			"facet": true,
+			"index": true,
+			"infix": false,
+			"locale": "",
+			"name": "colors",
+			"optional": false,
+			"sort": false,
+			"type": "string[]"
+		},
+		{
+			"facet": true,
+			"index": true,
+			"infix": false,
+			"locale": "",
+			"name": "eras",
+			"optional": true,
+			"sort": false,
+			"type": "string[]"
+		},
+		{
+			"facet": false,
+			"index": true,
+			"infix": false,
+			"locale": "",
+			"name": "description",
+			"optional": true,
+			"sort": false,
+			"type": "auto"
+		},
+		{
+			"facet": true,
+			"index": true,
+			"infix": false,
+			"locale": "",
+			"name": "priceBucket",
+			"optional": false,
+			"sort": false,
+			"type": "string"
+		},
+		{
+			"facet": true,
+			"index": true,
+			"infix": false,
+			"locale": "",
+			"name": "price",
+			"optional": false,
+			"sort": true,
+			"type": "int32"
+		},
+		{
+			"facet": true,
+			"index": true,
+			"infix": false,
+			"locale": "",
+			"name": "division",
+			"optional": true,
+			"sort": false,
+			"type": "string"
+		},
+		{
+			"facet": true,
+			"index": true,
+			"infix": false,
+			"locale": "",
+			"name": "department",
+			"optional": true,
+			"sort": false,
+			"type": "string"
+		},
+		{
+			"facet": true,
+			"index": true,
+			"infix": false,
+			"locale": "",
+			"name": "category",
+			"optional": true,
+			"sort": false,
+			"type": "string"
+		},
+		{
+			"facet": true,
+			"index": true,
+			"infix": false,
+			"locale": "",
+			"name": "subcategory",
+			"optional": true,
+			"sort": false,
+			"type": "string"
+		},
+		{
+			"facet": true,
+			"index": true,
+			"infix": false,
+			"locale": "",
+			"name": "sizes",
+			"optional": true,
+			"sort": false,
+			"type": "string[]"
+		},
+		{
+			"facet": false,
+			"index": true,
+			"infix": false,
+			"locale": "",
+			"name": "createdAt",
+			"optional": true,
+			"sort": false,
+			"type": "string"
+		},
+		{
+			"facet": true,
+			"index": true,
+			"infix": false,
+			"locale": "",
+			"name": "materials",
+			"optional": true,
+			"sort": false,
+			"type": "string[]"
+		},
+		{
+			"facet": false,
+			"index": false,
+			"infix": false,
+			"locale": "",
+			"name": "images",
+			"optional": true,
+			"sort": false,
+			"type": "auto"
+		}
+	],
+	"default_sorting_field": "price"
+}

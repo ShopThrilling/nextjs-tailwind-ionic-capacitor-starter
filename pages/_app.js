@@ -17,7 +17,6 @@ import { Capacitor } from '@capacitor/core';
 import notificationHandler from '../util/notificationsHandlerUtil';
 
 function MyApp({ Component, pageProps }) {
-
 	const addListeners = async () => {
 		await PushNotifications.addListener('registration', token => {
 			console.info('Registration token: ', token.value);
@@ -70,7 +69,6 @@ function MyApp({ Component, pageProps }) {
 				></meta>
 			</Head>
 			<Component {...pageProps} />
-			{/* <div id="autocomplete"></div> */}
 
 			<Script src="https://unpkg.com/ionicons@5.2.3/dist/ionicons.js"></Script>
 		</>
