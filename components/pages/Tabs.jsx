@@ -4,7 +4,7 @@ import { bagOutline, heartOutline, shirtOutline } from 'ionicons/icons';
 
 import Home from './Feed';
 import Settings from './Settings';
-import Cart from './Cart';
+import Cart from './Cart-Checkout/Cart';
 
 const Tabs = () => {
   return (
@@ -22,7 +22,7 @@ const Tabs = () => {
 
         <IonTabButton tab="cart" href="/cart">
           <IonIcon icon={bagOutline} />
-          <IonBadge color="primary"> 100 </IonBadge>
+          <IonBadge color="primary"> 3 </IonBadge>
         </IonTabButton>
 
         <IonTabButton tab="settings" href="/settings">
