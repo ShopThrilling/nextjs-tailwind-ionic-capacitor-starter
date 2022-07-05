@@ -24,7 +24,7 @@ const Tabs = () => {
 
         <IonTabButton tab="cart" href="/cart">
           <IonIcon icon={bagOutline} />
-          <IonBadge color="primary"> 100 </IonBadge>
+          <IonBadge color="primary"> 3 </IonBadge>
         </IonTabButton>
 
         <IonTabButton tab="settings" href="/settings">
