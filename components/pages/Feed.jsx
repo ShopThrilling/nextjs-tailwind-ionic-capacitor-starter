@@ -159,7 +159,7 @@ const Feed = () => {
             routing={routing}
         >
             <IonPage>
-                <IonHeader collapse='condense'>
+                <IonHeader>
                     <IonToolbar>
                         <IonTitle>New Arrivals</IonTitle>
                     </IonToolbar>
