@@ -4,7 +4,7 @@ import { bagOutline, heartOutline, shirtOutline } from 'ionicons/icons';
 
 import Home from './Feed';
 import Settings from './Settings';
-import Cart from './Cart';
+import Cart from './Cart-Checkout/Cart';
 
 const Tabs = () => {
   return (
