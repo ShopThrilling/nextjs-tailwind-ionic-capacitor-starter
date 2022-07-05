@@ -1,12 +1,13 @@
 import { useState } from 'react';
-import { IonButton, IonIcon, IonImg } from '@ionic/react';
+import { IonButton, IonIcon, IonImg, IonText } from '@ionic/react';
 import { heartOutline, heart } from 'ionicons/icons';
-import imgixUtil from '../util/imgixUtil';
 import axios from 'axios';
+import { useHistory } from 'react-router-dom';
 
 const Product = (props) => {
 	const { hit } = props;
 	const [favorite, setfavorite] = useState(false);
+	const history = useHistory();
 
 	const sendFavorites = async (product) => {
 		setfavorite(!favorite);
@@ -58,29 +59,21 @@ const Product = (props) => {
 	return (
 		<li
 			key={hit.objectID}
-			className="w-full rounded overflow-hidden p-2 bg-gray-100 relative"
+			className="w-full h-44 rounded overflow-hidden p-2 bg-gray-100 relative"
 			onClick={() => {
 				history.push({
-					pathname: `/feed/${hit.sku}`,
+					pathname: `/feed/${hit.id}`,
 					state: { product: hit }
 				})
 			}}
 		>
-			<IonImg
-				src={
-					hit.images
-						? imgixUtil.getImgSrc({
-							url: hit.images[0].src,
-							ratio: 'square',
-							opts: {
-								bg: 'f3f4f6',
-								fit: 'fill',
-							},
-						})
-						: 'https://s3.amazonaws.com/logos.ecountabl.com/49c44803-4f5d-4d4c-a943-d98ed18254a9-thrilling.png'
-				}
-				className="w-full"
-			/>
+			<div className='font-semibold truncate'>{hit.title}</div>
+
+			<div>{hit.description}</div>
+
+			<div className='ion-text-capitalize'>{hit.colors?.join(', ')}</div>
+			<div className='ion-text-capitalize'>{hit.eras?.join(', ')}</div>
+			<div className='ion-text-capitalize'>{hit.materials?.join(', ')}</div>
 
 			<IonButton onClick={() => sendFavorites(hit)} fill="clear" size="small" className="absolute right-0 bottom-1 text-black">
 				<IonIcon icon={favorite ? heart : heartOutline} size="small" />

@@ -8,7 +8,7 @@ import {
 	IonContent,
 	IonBackButton,
 } from '@ionic/react';
-import Image from 'next/image';
+// import Image from 'next/image';
 import { useLocation } from 'react-router-dom';
 import Card from '../../components/ui/Card';
 
@@ -28,9 +28,9 @@ const Product = () => {
 
 			<IonContent className="ion-padding" fullscreen>
 				<Card className="my-4 mx-auto">
-					<div className="h-72 w-full relative">
+					{/* <div className="h-72 w-full relative">
 						<Image className="rounded-t-xl" objectFit="contain" src={product.images[0]?.src} alt="" layout='fill' />
-					</div>
+					</div> */}
 					<div className="px-4 py-4 bg-white rounded-b-xl dark:bg-gray-900">
 						<h2 className="font-bold text-2xl text-gray-800 dark:text-gray-100">{product.title}</h2>
 						<h4 className="font-bold py-0 text-s text-gray-400 dark:text-gray-500 uppercase">{product.brand}</h4>
@@ -39,9 +39,9 @@ const Product = () => {
 						<div className="flex items-center space-x-4">
 							<ul className="text-gray-500 dark:text-gray-200 m-l-8 text-sm font-medium">
 								<li>Vendor: {product.vendor}</li>
-								<li>SKU: {product.sku}</li>
-								<li>Colors: {product.colors.join(', ')}</li>
-								<li>Materials: {product.materials.join(', ')}</li>
+								<li>SKU: {product.id}</li>
+								<li>Colors: {product.colors?.join(', ')}</li>
+								<li>Materials: {product.materials?.join(', ')}</li>
 							</ul>
 						</div>
 					</div>
