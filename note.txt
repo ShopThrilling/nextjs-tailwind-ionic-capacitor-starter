@@ -1,0 +1,2 @@
+Fields to index from Firebase
+createdAt, description, title, brand, vendor, conditionCode, sku, colors, eras, priceBucket, price, division, category, subcategory, sizes, materials, images, condition, inventory, size, totalInventory, id

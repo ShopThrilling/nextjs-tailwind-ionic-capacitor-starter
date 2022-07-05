@@ -5,6 +5,7 @@ import { bagOutline, heartOutline, shirtOutline } from 'ionicons/icons';
 import Home from './Feed';
 import Settings from './Settings';
 import Cart from './Cart';
+import Product from './Product';
 
 const Tabs = () => {
   return (
@@ -12,6 +13,7 @@ const Tabs = () => {
       <IonRouterOutlet>
         <Route exact path="/cart" component={Cart} />
         <Route exact path="/feed" component={Home} />
+		<Route exact path='/feed/:sku' component={() => <Product />} />
         <Route exact path="/settings" component={Settings} />
         <Route path="/" render={() => <Redirect to="/feed" />} exact={true} />
       </IonRouterOutlet>

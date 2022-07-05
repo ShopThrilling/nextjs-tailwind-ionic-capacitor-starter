@@ -29,8 +29,6 @@ import FILTER_FACETS from '../../mock/filterFacets';
 import { VirtualRefinementList } from '../VirtualRefinementList';
 import Autocomplete from '../Autocomplete';
 
-import qs from 'qs';
-
 const typesenseInstantsearchAdapter = new TypesenseInstantSearchAdapter({
     server: {
         apiKey: 'tnSic3TuqlLH6QoPzXragHKPZXSh6AZV', // Be sure to use a Search API Key
@@ -53,25 +51,6 @@ const typesenseInstantsearchAdapter = new TypesenseInstantSearchAdapter({
 const searchClient = typesenseInstantsearchAdapter.searchClient;
 
 
-function createURL(searchState) {
-    return qs.stringify(searchState, { addQueryPrefix: true });
-}
-
-function searchStateToUrl({ location }, searchState) {
-    if (Object.keys(searchState).length === 0) {
-        return '';
-    }
-
-    // Remove configure search state from query parameters
-    const { configure, ...rest } = searchState;
-    return `${location.pathname}${createURL(rest)}`;
-}
-
-function urlToSearchState({ search }) {
-    return qs.parse(search.slice(1));
-}
-
-
 const routing = {
     router: history(),
     stateMapping: simple(),
@@ -81,23 +60,16 @@ const Feed = () => {
     const [selectedFacet, setSelectedFacet] = useState(null);
     const modal = useRef(null);
 
-    const [searchState, setSearchState] = useState(() =>
-        urlToSearchState(window.location)
-    );
+    const [searchState, setSearchState] = useState(routing.router.read());
     const timerRef = useRef(null);
 
     useEffect(() => {
         clearTimeout(timerRef.current);
 
         timerRef.current = setTimeout(() => {
-            window.history.pushState(
-                searchState,
-                null,
-                searchStateToUrl({ location: window.location }, searchState)
-            );
+            routing.router.write(searchState);
         }, 400);
     }, [searchState]);
-
 
     const FilterRoot = () => (
         <>
@@ -143,7 +115,10 @@ const Feed = () => {
             <IonHeader translucent={true}>
                 <IonToolbar>
                     <IonButtons slot="start">
-                        <IonButton color="dark" onClick={() => setSelectedFacet(null)}>
+                        <IonButton
+                            color="dark"
+                            onClick={() => setSelectedFacet(null)}
+                        >
                             <IonIcon slot="icon-only" icon={chevronBackOutline} />
                         </IonButton>
                     </IonButtons>
@@ -176,27 +151,12 @@ const Feed = () => {
         </IonFooter>
     );
 
-    const onSubmit = useCallback(({ state }) => {
-        setSearchState((searchState) => ({
-            ...searchState,
-            query: state.query,
-        }));
-    }, []);
-
-    const onReset = useCallback(() => {
-        setSearchState((searchState) => ({
-            ...searchState,
-            query: '',
-        }));
-    }, []);
-
     return (
         <InstantSearch
             searchClient={searchClient}
             indexName='products'
             searchState={searchState}
             onSearchStateChange={setSearchState}
-            createURL={createURL}
             routing={routing}
         >
             <IonPage>
@@ -214,8 +174,6 @@ const Feed = () => {
                             query: searchState.query,
                         }}
                         openOnFocus
-                        onSubmit={onSubmit}
-                        onReset={onReset}
                     />
                 </IonHeader>
 
@@ -227,7 +185,7 @@ const Feed = () => {
                     <IonModal
                         ref={modal}
                         trigger="open-modal"
-                        onWillDismiss={() => setSearchState(urlToSearchState(window.location))}
+                        onWillDismiss={() => setSearchState(routing.router.read())}
                     >
                         {selectedFacet ? FilterFacet() : FilterRoot()}
 
