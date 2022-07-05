@@ -28,6 +28,7 @@ import SortFilterButtons from '../SortFilterButtons';
 import FILTER_FACETS from '../../mock/filterFacets';
 import { VirtualRefinementList } from '../VirtualRefinementList';
 import Autocomplete from '../Autocomplete';
+import CustomStats from '../CustomStats';
 
 const typesenseInstantsearchAdapter = new TypesenseInstantSearchAdapter({
     server: {
@@ -49,7 +50,6 @@ const typesenseInstantsearchAdapter = new TypesenseInstantSearchAdapter({
 });
 
 const searchClient = typesenseInstantsearchAdapter.searchClient;
-
 
 const routing = {
     router: history(),
@@ -102,7 +102,9 @@ const Feed = () => {
                         >
                             <IonLabel>{filter.title}</IonLabel>
 
-                            <IonNote>All</IonNote>
+                            <IonNote className="ion-text-capitalize truncate">
+                                {searchState?.products?.refinementList?.[filter.value]?.join(', ') ?? 'All'}
+                            </IonNote>
                         </IonItem>
                     ))}
                 </IonList>
@@ -115,10 +117,7 @@ const Feed = () => {
             <IonHeader translucent={true}>
                 <IonToolbar>
                     <IonButtons slot="start">
-                        <IonButton
-                            color="dark"
-                            onClick={() => setSelectedFacet(null)}
-                        >
+                        <IonButton color="dark" onClick={() => setSelectedFacet(null)}>
                             <IonIcon slot="icon-only" icon={chevronBackOutline} />
                         </IonButton>
                     </IonButtons>
@@ -128,7 +127,7 @@ const Feed = () => {
             </IonHeader>
 
             <IonContent className="ion-padding">
-                <CustomRefinementList attribute={selectedFacet.value} limit={30} sortBy={['name']} />
+                <CustomRefinementList attribute={selectedFacet.value} limit={1000} sortBy={['name']} />
             </IonContent>
         </>
     );
@@ -154,18 +153,16 @@ const Feed = () => {
     return (
         <InstantSearch
             searchClient={searchClient}
-            indexName='products'
+            indexName="products"
             searchState={searchState}
             onSearchStateChange={setSearchState}
             routing={routing}
         >
             <IonPage>
-                <IonHeader collapse="condense">
+                <IonHeader collapse='condense'>
                     <IonToolbar>
                         <IonTitle>New Arrivals</IonTitle>
                     </IonToolbar>
-
-                    <SortFilterButtons />
 
                     <Autocomplete
                         placeholder="Search products"
@@ -174,13 +171,22 @@ const Feed = () => {
                             query: searchState.query,
                         }}
                         openOnFocus
+                        className='ion-padding-start ion-padding-end bg-white'
                     />
+
+                    <div className='w-100% bg-white'>
+                        <CustomStats />
+                    </div>
                 </IonHeader>
 
                 <IonContent className="ion-padding" fullscreen>
+                    <SortFilterButtons />
+
                     <CustomInfiniteHits />
 
-                    {FILTER_FACETS.map(filter => <VirtualRefinementList key={filter.value} attribute={filter.value} />)}
+                    {FILTER_FACETS.map((filter) => (
+                        <VirtualRefinementList key={filter.value} attribute={filter.value} />
+                    ))}
 
                     <IonModal
                         ref={modal}
